@@ -1,7 +1,7 @@
 /* Custom CSS */
 
-.example .row > .col,
-.example .row > [class^=col-] {
+.example-content .row > .col,
+.example-content .row > [class^=col-] {
     padding-top: .75rem;
     padding-bottom: .75rem;
     background-color: rgba(86,61,124,.15);
