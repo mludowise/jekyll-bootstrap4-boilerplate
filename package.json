@@ -23,16 +23,16 @@
   "author": "Sergey Sokurenko",
   "license": "MIT",
   "devDependencies": {
-    "browserify": "^13.0.0",
-    "jslint": "^0.9.6",
+    "browserify": "^13.3.0",
+    "jslint": "^0.9.8",
     "live-server": "^1.0.0",
     "node-sass": "^3.7.0",
     "nodemon": "^1.9.2",
     "uglify-js": "^2.6.2"
   },
   "dependencies": {
-    "bootstrap": "4.0.0-alpha.2",
+    "bootstrap": "4.0.0-alpha.6",
     "jquery": "^2.2.3",
-    "tether": "^1.3.2"
+    "tether": "^1.4.0"
   }
 }

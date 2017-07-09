@@ -1,65 +1,4 @@
 //
-// Bootstrap stylesheets, comment unused asset imports to reduce main.min.css file
-//
-
-// Default Bootstrap variables
-
-@import "bootstrap/variables";
-@import "bootstrap/mixins";
-
-// Reset and dependencies
-
-@import "bootstrap/normalize";
-@import "bootstrap/print";
-
-// Core CSS
-
-@import "bootstrap/reboot";
-@import "bootstrap/type";
-@import "bootstrap/images";
-@import "bootstrap/code";
-@import "bootstrap/grid";
-@import "bootstrap/tables";
-@import "bootstrap/forms";
-@import "bootstrap/buttons";
-
-// Components
-
-@import "bootstrap/animation";
-@import "bootstrap/dropdown";
-@import "bootstrap/button-group";
-@import "bootstrap/input-group";
-@import "bootstrap/custom-forms";
-@import "bootstrap/nav";
-@import "bootstrap/navbar";
-@import "bootstrap/card";
-@import "bootstrap/breadcrumb";
-@import "bootstrap/pagination";
-@import "bootstrap/pager";
-@import "bootstrap/labels";
-@import "bootstrap/jumbotron";
-@import "bootstrap/alert";
-@import "bootstrap/progress";
-@import "bootstrap/media";
-@import "bootstrap/list-group";
-@import "bootstrap/responsive-embed";
-@import "bootstrap/close";
-
-// Components w/ JavaScript
-
-@import "bootstrap/modal";
-@import "bootstrap/tooltip";
-@import "bootstrap/popover";
-@import "bootstrap/carousel";
-
-// Utility classes
-
-@import "bootstrap/utilities";
-@import "bootstrap/utilities-background";
-@import "bootstrap/utilities-spacing";
-@import "bootstrap/utilities-responsive";
-
-//
 // Theme assets
 //
 
@@ -67,4 +6,47 @@
 
 @import "variables";
 
+//
+// Bootstrap stylesheets, comment unused asset imports to reduce main.min.css file
+//
 
+// Default Bootstrap
+
+@import "bootstrap/bootstrap";
+
+
+// Syntax highlighting
+
+@import "syntax";
+
+/* Custom CSS */
+
+.example-content {
+    display: block !important;
+
+    padding: 1rem;
+    @include media-breakpoint-up(sm) {
+        padding: 1.5rem;
+    }
+
+    >.row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .row {
+        >.col,
+        >[class^=col-] {
+            padding-top: .75rem;
+            padding-bottom: .75rem;
+            background-color: rgba(86,61,124,.15);
+            border: 1px solid rgba(86,61,124,.2);
+        }
+    }
+}
+
+.highlight {
+    padding: 1.5rem;
+    margin: 1rem 0;
+    background: none;
+}
