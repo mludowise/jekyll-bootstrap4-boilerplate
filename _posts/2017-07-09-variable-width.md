@@ -6,12 +6,12 @@ readme: >
   Using the `auto` width, columns can size itself based on the natural width of its content. This is super handy with single line content like inputs, numbers, etc. This, in conjunction with horizontal alignment classes, is very useful for centering layouts with uneven column sizes as viewport width changes.
 ---
 {% row class:justify-content-md-center %}
-    {% col width:equal lg:2 %}1 of 3{% endcol %}
+    {% col width:* lg:2 %}1 of 3{% endcol %}
     {% col width:12 md:auto %}Variable width content{% endcol %}
-    {% col width:equal lg:2 %}3 of 3{% endcol %}
+    {% col width:* lg:2 %}3 of 3{% endcol %}
 {% endrow %}
 {% row %}
     {% col %}1 of 3{% endcol %}
     {% col width:12 md:auto %}Variable width content{% endcol %}
-    {% col width:equal lg:2 %}3 of 3{% endcol %}
+    {% col width:* lg:2 %}3 of 3{% endcol %}
 {% endrow %}
