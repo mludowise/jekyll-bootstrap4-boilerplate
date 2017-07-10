@@ -6,30 +6,23 @@ layout: default
 
 ## Examples
 
-{% for post in site.posts %}
+{% for post in site.posts reversed %}
 ### {{ post.title | escape }}
 
 {{ post.readme | markdownify }}
-
-<div class="card card-outline-primary">
-    <div class="list-group list-group-flush">
-        <div class="list-group-item example-content">
-            {{ post.content | markdownify }}
-        </div>
-        <div class="list-group-item bg-faded">
+<div class="example">
+    <div class="example-content">
+        {{ post.content }}
+    </div>
+    <div class="example-code">
 {% highlight liquid %}
+{{ post.raw }}
+{% endhighlight %}
+    </div>
+    <div class="example-code">
+{% highlight html %}
 {{ post.content }}
 {% endhighlight %}
-        </div>
-        <div class="list-group-item bg-faded">
-            <pre>
-                <code class="language-html" data-lang="html">
-{% highlight html %}
-{{ post.content | markdownify }}
-{% endhighlight %}
-                </code>
-            </pre>
-        </div>
     </div>
 </div>
 {% endfor %}
