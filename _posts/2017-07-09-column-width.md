@@ -7,11 +7,11 @@ readme: >
 ---
 {% row %}
     {% col %}1 of 3{% endcol %}
-    {% col width=6 %}2 of 3 (wider){% endcol %}
+    {% col width:6 %}2 of 3 (wider){% endcol %}
     {% col %}3 of 3{% endcol %}
 {% endrow %}
 {% row %}
     {% col %}1 of 3{% endcol %}
-    {% col width=5 %}2 of 3 (wider){% endcol %}
+    {% col width:5 %}2 of 3 (wider){% endcol %}
     {% col %}3 of 3{% endcol %}
 {% endrow %}

@@ -2,10 +2,19 @@
 
 module Jekyll
     class BlockWithAttributes < Liquid::Block
+        TAG_ATTRIBUTES = /(\w+)\s*\:?\s*(#{::Liquid::QuotedFragment})?/o
+
         def initialize(name, params, tokens)
             super
+
+            @params = params.scan(TAG_ATTRIBUTES)
+
             @attributes = {}
-            params.scan(::Liquid::TagAttributes).each do |key, value|
+            params.scan(TAG_ATTRIBUTES).each do |key, value|
+                # Remove quotations from strings
+                unless value.nil?
+                    value = value.strip.gsub(/^['"]/, "").gsub(/['"]$/, "")
+                end
                 @attributes[key] = value
             end
         end
@@ -36,6 +45,7 @@ module Jekyll
 
         def initialize(name, params, tokens)
             super
+            @debug = []
             processAttributes
         end
 
@@ -47,13 +57,14 @@ module Jekyll
             pulls =    {}
             hidden =   {}
 
+
             # Parse attributes
             @attributes.each do |key, value|
                 key = key.downcase
 
-                if key.casecmp("class")
+                if key == "class"
                     classAtt = value
-                elsif key.casecmp("width")
+                elsif key == "width"
                     widths["xs"] = value
                 elsif BREAKPOINTS_A.include? key
                     widths[key] = value
@@ -69,10 +80,10 @@ module Jekyll
                     breakpoint = parseBreakpoint(key, PULL_P)
                     columns = getColumns(value)
                     pulls[breakpoint] = columns
-                elsif key.casecmp("hiddenUp")
+                elsif key == "hiddenup"
                     breakpoint = getBreakpoint(value)
                     hidden["up"] = breakpoint
-                elsif key.casecmp("hiddenDown")
+                elsif key == "hiddendown"
                     breakpoint = getBreakpoint(value)
                     hidden["down"] = breakpoint
                 end
@@ -92,7 +103,7 @@ module Jekyll
                 pull =   pulls[breakpoint]
 
                 if widths.has_key?(breakpoint)
-                    width = widths[breakpoint]
+                    width =  widths[breakpoint]
                     colClass = buildColClass(breakpoint, width)
                     unless colClass.nil?
                         @classes << colClass
@@ -151,14 +162,21 @@ module Jekyll
 
         # e.g. col, col-2, col-sm-2, col-sm, col-md-auto, col-auto
         def buildColClass(breakpoint, width)
-            columns = getColumns(width)
-
-            if width != nil
+            # convert to lowercase
+            unless width.nil?
                 width = width.downcase
             end
 
-            # Only valid widths are nil, auto, or 1-12
-            if width != nil && width != "auto" && columns == nil
+            if width == nil
+                # valid
+            elsif width == "equal"
+                width = nil
+            elsif width == "auto"
+                # valid
+            elsif getColumns(width) != nil
+                # valid
+            else
+                # Invalid width
                 return nil
             end
 
@@ -188,7 +206,7 @@ module Jekyll
 
             site = context.registers[:site]
             converter = site.find_converter_instance(Jekyll::Converters::Markdown)
-            "\t<div class=\"" + @classes.join(" ") + "\">\n\t\t" + converter.convert(text).strip + "\n\t</div>" + @attributes.to_s
+            "\t<div class=\"" + @classes.join(" ") + "\">\n\t\t" + converter.convert(text).strip + "\n\t</div>"
             # '<div class="col-md-6">' + text + '</div>'
         end
     end
